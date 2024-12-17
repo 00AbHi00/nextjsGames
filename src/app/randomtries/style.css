@@ -1,0 +1,13 @@
+@keyframes shake {
+    0% { transform: translate(10px, 0px)  }  
+    80% { transform: translate(-20px, 0px)  } 
+    100% { transform: translate(10px, 0px)  }
+  }
+#shaker{
+    transition: 1s;
+}
+.red{
+    transition: 1s;
+    color: red;
+    animation: shake 200ms ;
+}
