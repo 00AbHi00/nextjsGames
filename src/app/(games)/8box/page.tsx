@@ -32,12 +32,7 @@ export default function Page() {
     copy[gap]=currentValue
     setNumbers(()=>copy)
   }
-  useEffect(()=>{
-    for (let i=0;i<numbers.length;i++)
-    {
-     let temp=document.getElementById(i)
-    }
-  },[])
+  
 
 
   const shuffle = () => {
