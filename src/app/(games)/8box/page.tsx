@@ -35,9 +35,10 @@ export default function Page() {
   useEffect(()=>{
     for (let i=0;i<numbers.length;i++)
     {
-        
+     let temp=document.getElementById(i)
     }
   },[])
+
 
   const shuffle = () => {
     setNumbers([]);
