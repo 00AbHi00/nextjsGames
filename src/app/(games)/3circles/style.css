@@ -1,0 +1,46 @@
+/* Animation classes */
+.move1 {
+    animation: move1 2s ease-in-out infinite alternate;
+  }
+  
+  .move2 {
+    animation: move2 2s ease-in-out infinite alternate;
+  }
+  
+  .move3 {
+    animation: move3 7s ease-in-out infinite alternate;
+  }
+  
+  /* Pause animation */
+  .stopped {
+    animation-play-state: paused !important; /* Force pausing */
+  }
+  
+  /* Keyframes */
+  @keyframes move1 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(300px);
+    }
+  }
+  
+  @keyframes move2 {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateX(-150px) translateY(450px);
+    }
+  }
+  
+  @keyframes move3 {
+    0% {
+      transform: translateX(0) translateY(0);
+    }
+    100% {
+      transform: translateX(230px) translateY(90px);
+    }
+  }
+  
