@@ -3,66 +3,61 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Page() {
-  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8,""]);
-  const [moves,setMoves]=useState(0)
-  const solution=[0,1,2,3,4,5,6,7,8,""]
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, ""]);
+  const [moves, setMoves] = useState(0);
+  const [anySwap, setanySwap] = useState(3);
   function findNeighbors() {
-    const x=numbers.indexOf("")
+    const x = numbers.indexOf("");
     const neighbors = [];
     // Corner Cells
     if (x === 0) neighbors.push(1, 3, 4);
     else if (x === 2) neighbors.push(1, 4, 5);
     else if (x === 6) neighbors.push(3, 4, 7);
     else if (x === 8) neighbors.push(4, 5, 7);
-  
     // Middle Edge Cells
     else if (x === 1) neighbors.push(0, 2, 3, 4, 5);
     else if (x === 3) neighbors.push(0, 1, 4, 6, 7);
     else if (x === 5) neighbors.push(1, 2, 4, 7, 8);
     else if (x === 7) neighbors.push(3, 4, 5, 6, 8);
-  
     // Center Cell
     else if (x === 4) neighbors.push(0, 1, 2, 3, 5, 6, 7, 8);
     return neighbors;
   }
-  const swap=(currentId:number,currentValue:number,gap:number)=>{
-    let copy:Array<string | number>=[...numbers]
-    console.log(copy)
-    copy[currentId]=""
-    copy[gap]=currentValue
-    setNumbers(()=>copy)
-  }
-  
-
+  const swap = (currentId: number, currentValue: number, gap: number) => {
+    let copy: Array<string | number> = [...numbers];
+    console.log(copy);
+    copy[currentId] = "";
+    copy[gap] = currentValue;
+    setNumbers(() => copy);
+  };
 
   const shuffle = () => {
     setNumbers([]);
-    setMoves(0)
-    let copy:Array<string | number> = [];
+    setMoves(0);
+    let copy: Array<string | number> = [];
     let random2 = Math.floor(Math.random() * 8 + 1);
-     while (copy.length < 8) {
+    while (copy.length < 8) {
       let random = Math.floor(Math.random() * 8 + 1);
 
       if (!copy.includes(random)) {
         copy.push(random);
       }
     }
-    copy=copy.toSpliced(random2,0,"")
+    copy = copy.toSpliced(random2, 0, "");
     setNumbers(() => copy);
   };
   const shift = (e: React.MouseEvent<HTMLDivElement>) => {
-    let neighbors=findNeighbors();
-    let gap=numbers.indexOf("")
-    let currentId=parseInt(e.currentTarget.id)
-    let currentValue=parseInt(e.currentTarget.innerText)
-    
-    if (neighbors.includes(currentId))
-    {
-        setMoves((moves)=>moves+1)
-        swap(currentId,currentValue,gap)
-        // alert(`shift ${e.currentTarget.id} to ${gap}`)
+    let neighbors = findNeighbors();
+    let gap = numbers.indexOf("");
+    let currentId = parseInt(e.currentTarget.id);
+    let currentValue = parseInt(e.currentTarget.innerText);  
+
+    if (neighbors.includes(currentId)) {
+      setMoves((moves) => moves + 1);
+      swap(currentId, currentValue, gap);
+      // alert(`shift ${e.currentTarget.id} to ${gap}`)
     }
-};
+  };
   return (
     <>
       <button
@@ -75,7 +70,10 @@ export default function Page() {
       >
         Shuffle
       </button>
-      {moves}
+      <div className="flex flex-col">
+        <span>Moves:{moves}</span>
+        <span>Any Swaps{anySwap}</span>
+      </div>
       <div className="transitaion-all grid p-3 outline m-10 h-lvh gap-x-2 gap-y-4 grid-cols-3 bg-red-600 place-items-center">
         {numbers.map((item, i) => {
           if (item == "") {
