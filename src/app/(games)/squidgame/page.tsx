@@ -1,111 +1,82 @@
-"use client"
-import React, { useRef, useEffect, useState } from "react";
+"use client";
+import { useState } from "react";
 
-// Card class for general card setup
-class Card {
-  name: string;
-  posX: number;
-  posY: number;
-  width: number;
-  height: number;
-
-  constructor(name: string, posX: number, posY: number) {
-    this.name = name;
-    this.posX = posX;
-    this.posY = posY;
-    this.width = 80; // Width of each card
-    this.height = 120; // Height of each card
-  }
-
-  // Method to draw the card on canvas
-  draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(this.posX * 90, this.posY * 130, this.width, this.height); // 90 and 130 are spacing factors
-    ctx.fillStyle = "white";
-    ctx.font = "16px Arial";
-    ctx.fillText(this.name, this.posX * 90 + 10, this.posY * 130 + 30); // Draw card name
-  }
-}
-
-// PlayerCard class (extends from Card)
-class PlayerCard extends Card {
-  constructor(posX: number, posY: number) {
-    super("Player", posX, posY);
-  }
-
-  // Add player-specific movement logic here
-  move(direction: string) {
-    if (direction === "up") this.posY--;
-    if (direction === "down") this.posY++;
-    if (direction === "left") this.posX--;
-    if (direction === "right") this.posX++;
-  }
-}
-
-export default function Game() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [playerCard, setPlayerCard] = useState<PlayerCard | null>(null);
-
-  useEffect(() => {
-    const player = new PlayerCard(0, 0); // Initial position of the player card at (0, 0)
-    setPlayerCard(player);
-
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-
-    if (ctx) {
-      // Function to draw the card
-      const draw = () => {
-        if (ctx) {
-          // Clear the canvas before each redraw
-          ctx.clearRect(0, 0, 1000, 1000);
-
-          // Draw the player card
-          player.draw(ctx);
-        }
-      };
-
-      // Handle key presses to move the player
-      const handleKeyPress = (event: KeyboardEvent) => {
-        if (!player) return;
-
-        switch (event.key) {
-          case "ArrowUp":
-            player.move("up");
-            break;
-          case "ArrowDown":
-            player.move("down");
-            break;
-          case "ArrowLeft":
-            player.move("left");
-            break;
-          case "ArrowRight":
-            player.move("right");
-            break;
-          default:
-            break;
-        }
-
-        draw(); // Redraw the updated canvas after the move
-      };
-
-      // Attach event listener for keydown events
-      window.addEventListener("keydown", handleKeyPress);
-
-      // Initial drawing
-      draw();
-
-      // Cleanup the event listener on component unmount
-      return () => {
-        window.removeEventListener("keydown", handleKeyPress);
-      };
-    }
-  }, [playerCard]);
-
+export default function FunctionName() {
+  const positionPlayer = [];
+  const [inventory, setInventory] = useState({
+    pushNearby: 1,
+    swapPos: 1,
+    moveEnd: 1,
+  });
   return (
-    <div>
-      <h1>Card Game</h1>
-      <canvas ref={canvasRef} width={500} height={400} style={{ border: "1px solid black" }}></canvas>
+    <div className="p-2 bg-red-300/20 sm:mx-16 md:mx-64">
+      Player Inventory:
+      <div className="flex justify-between p-2">
+        {Object.entries(inventory).map(([key, value]) => {
+          return (
+            <div className=" hover:bg-slate-700 cursor-pointer bg-slate-800 p-3 rounded-lg">
+              <span>{key}:</span>
+              <span>{value}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="grid grid-cols-4 grid-rows-3   bg-red-300">
+        {Array.from({ length: 10 }).map((_, key) => {
+          if (key == 3) {
+            return (
+              <Player
+                className="m-3 bg-slate-300"
+                key={key}
+                id={`item${key}`}
+              />
+            );
+          } else {
+            return <Enemy key={key} id={`item${key}`} />;
+          }
+        })}
+      </div>
+      <PopUp />
     </div>
   );
 }
+
+const Player = ({
+  id,
+  key,
+  className = "",
+}: {
+  id: string;
+  key: number;
+  className: string;
+}) => {
+  return <div id={id} key={key} className={`m-1 h-32 p-3  ${className}`}></div>;
+};
+
+const Enemy = ({
+  id,
+  key,
+  className = "",
+}: {
+  id: string;
+  key: number;
+  className?: string;
+}) => {
+  return (
+    <div
+      id={id}
+      key={key}
+      className={`m-1 h-32 p-3 bg-blue-800 ${className}`}
+    ></div>
+  );
+};
+
+const PopUp = () => {
+  return (
+    <div className="h-screen w-screen absolute left-0 top-0 bg-red-900/20 backdrop-blur-3xl">
+      <div className="absolute top-1/2 left-1/2 ">
+        <div className="flex justify-between p-2">Are you sure</div>
+      </div>
+    </div>
+  );
+};

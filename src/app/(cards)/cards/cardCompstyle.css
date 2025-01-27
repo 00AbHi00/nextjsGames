@@ -34,8 +34,8 @@ body {
 
 #cardBack2{
         --s: 64px; /* control the size*/
-        --c1: #c02942;
-        --c2: #53777a;
+        --c1: #eaeaea;
+        --c2: #077d87;
         --c3: #b9a257;
         --c4: #d95b43;
         
