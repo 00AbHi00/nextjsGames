@@ -3,18 +3,66 @@ import { useState } from "react";
 
 export default function FunctionName() {
   const positionPlayer = [];
+  
+  if(typeof window !== 'undefined'){
+    // now access your localStorage
+    const oldInventory = localStorage.getItem('data');
+  }
+
+// Case 1: no local storage magic
   const [inventory, setInventory] = useState({
-    pushNearby: 1,
-    swapPos: 1,
-    moveEnd: 1,
+    pushNearby: 3,
+    swapPos: 3,
+    moveEnd: 3,
   });
+
+  // Case 2:Local storage magic
+  const specialPowers = (key: string) => {
+    const temp = {...inventory};
+    switch (key) {
+      case "pushNearby":
+        if (temp.pushNearby>0){
+          temp.pushNearby--;
+        }        else{
+          alert("You are out of this action")
+        }
+ 
+        break;
+
+      case "swapPos":
+        if (temp.swapPos>0){
+          temp.swapPos--;
+        }
+        else{
+          alert("You are out of this action, buy more")
+        }
+ 
+        break;
+      case "moveEnd":
+        if (temp.moveEnd>0){
+          temp.moveEnd--;
+        }
+        else{
+          alert("You are out of this action, buy more")
+        }
+        break;
+      default:
+        break;
+    }
+    setInventory(inventory=>({
+      ...temp,
+    }))
+  };
   return (
-    <div className="p-2 bg-red-300/20 sm:mx-16 md:mx-64">
+    <div className="p-2 bg-red-300/20 md:mx-32">
       Player Inventory:
       <div className="flex justify-between p-2">
         {Object.entries(inventory).map(([key, value]) => {
           return (
-            <div className=" hover:bg-slate-700 cursor-pointer bg-slate-800 p-3 rounded-lg">
+            <div
+              onClick={() => specialPowers(key)}
+              className=" hover:bg-slate-700 cursor-pointer bg-slate-800 p-3 rounded-lg"
+            >
               <span>{key}:</span>
               <span>{value}</span>
             </div>
@@ -36,7 +84,7 @@ export default function FunctionName() {
           }
         })}
       </div>
-      <PopUp />
+      {/* <PopUp /> */}
     </div>
   );
 }
