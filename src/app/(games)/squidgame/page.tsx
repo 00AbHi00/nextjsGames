@@ -4,10 +4,7 @@ import { useState } from "react";
 export default function FunctionName() {
   const positionPlayer = [];
   
-  if(typeof window !== 'undefined'){
-    // now access your localStorage
-    const oldInventory = localStorage.getItem('data');
-  }
+  
 
 // Case 1: no local storage magic
   const [inventory, setInventory] = useState({
@@ -17,6 +14,17 @@ export default function FunctionName() {
   });
 
   // Case 2:Local storage magic
+  // const [inventory, setInventory] = useState({
+  //   pushNearby: 0,
+  //   swapPos: 0,
+  //   moveEnd: 0,
+  // });
+  // if(typeof window !== 'undefined'){
+  //   // now access your localStorage
+  //   const oldInventory = localStorage.getItem('data');
+  //   console.log(oldInventory)
+  // }
+
   const specialPowers = (key: string) => {
     const temp = {...inventory};
     switch (key) {
