@@ -1,0 +1,39 @@
+/* Hide the default checkbox */
+.hidden {
+    display: none;
+  }
+  
+  /* Style the label to look like a slider */
+  .toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* The "dot" or circle that moves */
+  .toggle-label::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* When the checkbox is checked, change the background color and move the dot */
+  input:checked + .toggle-label {
+    background-color: #4caf50;
+  }
+  
+  input:checked + .toggle-label::before {
+    transform: translateX(26px); /* Move the circle to the right */
+  }
+  

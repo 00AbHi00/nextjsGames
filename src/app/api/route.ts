@@ -1,11 +1,11 @@
-// import data from "@/app/datas/data"
-// import { NextResponse } from "next/server"
-// export async function GET() {
-//     // console.log(data)
-//     return NextResponse.json(
-//         {
-//             "Subhalab":[ data]  
-//         },
-        
-//     ) 
-// }
+// C:/nextjs/learning2/src/app/api/route.ts
+
+import { NextResponse } from 'next/server'
+
+export function GET(request: Request) {
+  return NextResponse.json({ message: 'Hello from GET' })
+}
+
+export function POST(request: Request) {
+  return NextResponse.json({ message: 'Hello from POST' })
+}
