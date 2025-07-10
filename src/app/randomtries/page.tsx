@@ -63,19 +63,17 @@ function App() {
         <>
           <div
               className=""
-              id="shaker"
               style={{
                   display: "flexbox",
-                  margin: "auto",
                   textAlign: "center",
                   fontSize:80 +"px",
                 }}
           >
-              <h1>{count}</h1>
+              <h1  id="shaker">{count}</h1>
           </div>
           <div
           onClick={ss}>
-              Hello
+              1. Click Me
         </div>
       </>
     );
