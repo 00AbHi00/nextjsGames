@@ -1,4 +1,4 @@
-import { PropContext } from "./page";
+import { PropContext } from "./propContext";
 import Component2 from "./comp2";
 import { useContext } from "react";
 export default function Component1() {

@@ -53,7 +53,7 @@ export default function AluCross() {
     }
   };
 
-  const getWinningCombinations = breakDownWinningCombinations(winner(n), 3);
+  const getWinningCombinations = breakDownWinningCombinations(winner(4), 3);
   const equalCheck = (moves, combination) => {
     return combination.every((val) => moves.includes(val));
   };
@@ -100,6 +100,9 @@ export default function AluCross() {
     } else if (winners === "Z") {
       setTurnState(2);
     }
+    boxes.map((val, index) => (
+      document.getElementById(`box-${index}`)
+    ))
     setBoxes(Array(n ** 2).fill(""));
     setMoveX([]);
     setMoveY([]);
@@ -123,7 +126,7 @@ export default function AluCross() {
               }`}
               onClick={() => changeState(index)}
             >
-              {val}
+              {val} {index}
             </div>
           ))}
         </div>

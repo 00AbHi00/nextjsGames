@@ -9,6 +9,8 @@
 //   });
 //   const data = await res.json();
 
+import { redirect } from "next/dist/server/api-utils";
+
 //   return {
 //     props: { user: data },
 //   };
@@ -17,3 +19,8 @@
 // export default function Profile({ user }) {
 //   return <h1>{user.name}</h1>;
 // }
+
+export default function abc()
+{
+ return(<>HI</>)
+}

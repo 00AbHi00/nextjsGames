@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { PropContext } from "./page";
+import { PropContext } from "./propContext";
+
 
 export default function Component2() {
   const context = useContext(PropContext);

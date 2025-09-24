@@ -3,13 +3,8 @@
 "use client";
 import { useState, createContext } from "react";
 import Component1 from "./comp1";
-interface PropContextType {
-  value: string;
-  setValue: (val: string) => void;
-}
-export const PropContext = createContext<PropContextType | undefined>(
-  undefined
-);
+import { PropContext } from "./propContext";
+
 
 export default function FunctionName() {
     const [value, setValue] = useState("Initial value");

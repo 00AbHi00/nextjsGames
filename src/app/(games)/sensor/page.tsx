@@ -1,8 +1,6 @@
 // Sensor data doesn't work with http so need to use
 // localtunnel and need to keep public ip as password in the device accessing it
-
-// PS C:\nextjs\abhishek_website> npx localtunnel --port 3000 --subdomain abhishek
-
+// localtunnel --port 3000 --subdomain abhishek
 "use client";
 
 import { useState } from "react";
