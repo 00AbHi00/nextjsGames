@@ -100,9 +100,12 @@ export default function AluCross() {
     } else if (winners === "Z") {
       setTurnState(2);
     }
-    boxes.map((val, index) => (
+    boxes.map((_, index) => (
       document.getElementById(`box-${index}`)
     ))
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.backgroundColor = "rgba(255,0,0,0.1)";
+    }
     setBoxes(Array(n ** 2).fill(""));
     setMoveX([]);
     setMoveY([]);
