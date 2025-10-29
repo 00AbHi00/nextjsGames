@@ -1,17 +1,15 @@
 export default function winner(arrSize) {
   const combinations = [];
-  
   const generateSubsets = (array) => {
-  const subsets = [];
-  const length = 5; // fixed length for winning
-  if (array.length >= length) {
-    for (let i = 0; i <= array.length - length; i++) {
-      subsets.push(array.slice(i, i + length));
+    const subsets = [];
+    // Generate subsets of length from 2 up to arrSize
+    for (let length = 2; length <= arrSize; length++) {
+      for (let i = 0; i <= array.length - length; i++) {
+        subsets.push(array.slice(i, i + length));
+      }
     }
-  }
-  return subsets;
-};
-
+    return subsets;
+  };
 
   // Rows
   for (let i = 0; i < arrSize; i++) {
